@@ -1,16 +1,16 @@
 #!/bin/sh
-# MAKE SURE /zs32/home/shliu/softwares/fusion_twas-master/FUSION.compute_weights.R IS IN YOUR PATH
+# MAKE SURE FUSION.compute_weights.R IS IN YOUR PATH
 # FILL IN THESE PATHS
 if [ $# -ne 3 ]; then
     echo "ERROR: YOU MUST INPUTE 3 PARAMETER like: bash TWAS_weights.bash expression GENO covariant.txt"
 else
-    GCTA="/zs32/home/shliu/softwares/fusion_twas-master/gcta_nr_robust"
+    GCTA="gcta_nr_robust"
     PLINK="plink"
-    PLINK2="/opt/tools/plink_linux_x86_64/plink"
-    GEMMA="/zs32/home/shliu/softwares/gemma.linux"
+    PLINK2="plink2"
+    GEMMA="gemma.linux"
 # ALTERNATIVELY: ENSURE THAT plink, gcta, gemma CAN BE CALLED FROM PATH AND REMOVE --PATH_* FLAGS BELOW
 # PATH TO DIRECTORY CONTAINING LDREF DATA (FROM FUSION WEBSITE or https://data.broadinstitute.org/alkesgroup/FUSION/LDREF.tar.bz2)
-    LDREF="/zs32/home/shliu/database/TWAS/LDREF"
+    LDREF="TWAS/LDREF"
 # THIS IS USED TO RESTRICT INPUT SNPS TO REFERENCE IDS ONLY
 
 # PATH TO GEUVADIS GENE EXPRESSION MATRIX:
@@ -51,7 +51,7 @@ else
     $PLINK --bfile $PRE_GENO$CHR --allow-no-sex --pheno $OUT.pheno --make-bed --out $OUT --keep $OUT.pheno --chr $CHR --from-bp $P0 --to-bp $P1 --noweb --extract $LDREF/1000G.EUR.$CHR.bim
 
 # Process all samples together (for reference purposes only since this is mult-ethnic data)
-    Rscript /zs32/home/shliu/softwares/fusion_twas-master/test/FUSION.compute_weights2.R --bfile $OUT --PATH_plink /opt/tools/plink_linux_x86_64/plink --tmp $OUT.tmp --out ./WEIGHTS/$OUT.final --verbose 0 --save_hsq --PATH_gcta $GCTA --PATH_gemma $GEMMA --covar $3 --models blup,lasso,top1,enet
+    Rscript FUSION.compute_weights2.R --bfile $OUT --PATH_plink $PLINK2 --tmp $OUT.tmp --out ./WEIGHTS/$OUT.final --verbose 0 --save_hsq --PATH_gcta $GCTA --PATH_gemma $GEMMA --covar $3 --models blup,lasso,top1,enet
 
 # ALTERNATIVELY ADD COVARIATES HERE USING THE --covar FLAG
 # MINIMAL COMMAND IS: `Rscript /zs32/home/shliu/softwares/fusion_twas-master/FUSION.compute_weights.R --bfile $OUT --tmp $OUT.$pop.tmp --out $FINAL_OUT`
