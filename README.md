@@ -1,15 +1,11 @@
 #Chinese-brain-project eQTL pipeline
 
+This repository contains analysis pipelines for:
 
-It's the code for our paper "......"
-
-
-##Dependence 
-R
-QTLtools
-LDSC
-GREGOR
-TWAS
+RNA-seq alignment, quantification, and quality control
+eQTL mapping and functional annotation
+Intergrate with GWAS summary result
+Preservation test and robust WGCNA
 
 
 To caucalate eplication rate between eQTL studies
