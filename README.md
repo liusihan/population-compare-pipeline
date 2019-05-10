@@ -3,8 +3,11 @@
 This repository contains analysis pipelines for:
 
 RNA-seq alignment, quantification, and quality control
+
 eQTL mapping and functional annotation
+
 Intergrate with GWAS summary result
+
 Preservation test and robust WGCNA
 
 
