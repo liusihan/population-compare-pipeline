@@ -11,8 +11,10 @@ Intergrate with GWAS summary result
 Preservation test and robust WGCNA
 
 
-To caucalate eplication rate between eQTL studies
+#To caucalate eplication rate between eQTL studies
+   
    Rscript pi1.r P.txt
+ 
  NOTE: P.txt is a text file with nominal P value per line without head
  
  
