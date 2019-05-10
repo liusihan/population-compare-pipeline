@@ -1,7 +1,7 @@
 #!/bin/sh
 # MAKE SURE index.r RNA_processing.r and FDR.r ARE IN YOUR PATH
 # FILL IN THESE PATHS
-if [ $# -ne 5 ]; then
+if [ $# -ne 6 ]; then
     echo "ERROR: YOU MUST INPUTE 5 PARAMETER like: bash permute.bash sample_size index.txt PEER_factor FDR output_dir raw_counts.txt"
 else
     Rscript index.r $1 $2
