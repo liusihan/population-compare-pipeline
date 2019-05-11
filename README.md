@@ -22,7 +22,7 @@ Rscript pi1.r P.txt
 NOTE: P.txt is a text file with nominal P value per line without head
 
 
-### robust eQTL
+### Robust eQTL
 ```Linux
 bash robust_eQTL.sh sample_size index.txt PEER_factor FDR output_dir raw_counts.txt
 ```
@@ -34,7 +34,7 @@ bash robust_eQTL.sh sample_size index.txt PEER_factor FDR output_dir raw_counts.
 * raw_counts.txt: raw counts data, each column stand for a sample, each raw stand for a gene
 
 
-### create TWAS expressing weights
+### Create TWAS expressing weights
 ```Linux
 bash TWAS_compute_weights.bash expression GENO covariant.txt
 ```
