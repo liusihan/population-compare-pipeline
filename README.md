@@ -16,8 +16,8 @@ git clone https://github.com/liusihan/Chinese-brain-project
 ### Software
   * R-3.3.3
   * [QTLtools](https://qtltools.github.io/qtltools/)
-  * LDSC(https://github.com/bulik/ldsc)
-  * TWAS(http://gusevlab.org/projects/fusion/#jointconditional-tests-and-plots)
+  * [LDSC](https://github.com/bulik/ldsc)
+  * [TWAS](http://gusevlab.org/projects/fusion/#jointconditional-tests-and-plots)
 
 
 
