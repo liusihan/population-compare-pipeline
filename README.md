@@ -13,7 +13,12 @@ This repository contains analysis pipelines for:<br>
 git clone 
 ```
 
-   Rscript pi1.r P.txt
+## Usage
+
+### QTl Replicatin rate
+```R
+Rscript pi1.r P.txt
+```
 NOTE: P.txt is a text file with nominal P value per line without head
  
  
