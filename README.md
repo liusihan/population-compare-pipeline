@@ -27,6 +27,7 @@ git clone https://github.com/liusihan/Chinese-brain-project
 ```R
 Rscript pi1.r P.txt
 ```
+
 `NOTE`: P.txt is a text file with nominal P value per line without head
 
 
@@ -41,6 +42,7 @@ bash robust_eQTL.sh sample_size index.txt PEER_factor FDR output_dir raw_counts.
 * output_dir: prefix of output directory
 * raw_counts.txt: raw counts data, each column stand for a sample, each raw stand for a gene
 
+`NOTE`: the output_file include three type eQTL results under different mode in QTLtools(nominal/permutation/conditional)
 
 ### Create TWAS expressing weights
 ```Linux
