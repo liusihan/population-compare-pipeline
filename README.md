@@ -42,3 +42,7 @@ bash TWAS_compute_weights.bash expression GENO covariant.txt
 * GENO: plink bfile for chromosome
 * covariant.txt: text file contain the covariants
   
+### Robust WGCNA
+```R
+Rscript ....
+```
