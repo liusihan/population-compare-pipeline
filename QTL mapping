@@ -12,7 +12,7 @@ done
 ##refine genotype and remove SNPs with R2<0.3
 for i in {1..22} X
 do
-java -jar /zs32/home/yjiang/softwares/beagle/beagle.27Jul16.86a.jar map=plink.chr"$i".GRCh37.map gl=chr"$i"_fsample.recode.vcf out=chr$i.refine.gl
+java -jar beagle.27Jul16.86a.jar map=plink.chr"$i".GRCh37.map gl=chr"$i"_fsample.recode.vcf out=chr$i.refine.gl
 zcat chr$i.refine.gl.vcf.gz | awk '{if($1~/^#/){print}else{flag=0;split($8,a,";");for(i in a){if(a[i]~/^AR2=/&&substr(a[i],5)>=0.3){flag=1}}if(flag==1){print}}}'>chr$i.beagle.refine.r2.vcf
 done
 
