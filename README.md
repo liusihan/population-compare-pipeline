@@ -10,15 +10,19 @@ This repository contains analysis pipelines for:<br>
 
 ### Install
 ```Linux
-git clone 
+git clone https://github.com/liusihan/Chinese-brain-project
 ```
 
 ## Usage
 
-### QTl Replicatin rate
+### QTl replicatin rate
 ```R
 Rscript pi1.r P.txt
 ```
 NOTE: P.txt is a text file with nominal P value per line without head
+
+
+### robust eQTL
+
  
  
