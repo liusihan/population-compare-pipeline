@@ -1,4 +1,6 @@
-#Chinese-brain-project eQTL pipeline
+Chinese-brain-project eQTL pipeline
+====
+=
 
 This repository contains analysis pipelines for:
 
