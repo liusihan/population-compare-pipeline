@@ -32,4 +32,13 @@ bash robust_eQTL.sh sample_size index.txt PEER_factor FDR output_dir raw_counts.
 * FDR: storey FDR qvalue for adjust P value
 * output_dir: prefix of output directory
 * raw_counts.txt: raw counts data, each column stand for a sample, each raw stand for a gene
+
+
+### create TWAS expressing weights
+```Linux
+bash TWAS_compute_weights.bash expression GENO covariant.txt
+```
+* expression: gene expression file with three aditional column: chr, star, end
+* GENO: plink bfile for chromosome
+* covariant.txt: text file contain the covariants
   
