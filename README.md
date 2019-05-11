@@ -8,7 +8,11 @@ This repository contains analysis pipelines for:<br>
   * Preservation test and robust WGCNA<br>
 
 
-To caucalate eplication rate between eQTL studies<br>
+### Install
+```Linux
+git clone 
+```
+
    Rscript pi1.r P.txt
 NOTE: P.txt is a text file with nominal P value per line without head
  
