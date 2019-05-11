@@ -13,7 +13,11 @@ This repository contains analysis pipelines for:<br>
 git clone https://github.com/liusihan/Chinese-brain-project
 ```
 
-##
+### Software
+  * R-3.3.3
+  * QTLtools(https://qtltools.github.io/qtltools/)
+  * LDSC(https://github.com/bulik/ldsc)
+  * TWAS(http://gusevlab.org/projects/fusion/#jointconditional-tests-and-plots)
 
 
 
@@ -23,7 +27,7 @@ git clone https://github.com/liusihan/Chinese-brain-project
 ```R
 Rscript pi1.r P.txt
 ```
-NOTE: P.txt is a text file with nominal P value per line without head
+`NOTE`: P.txt is a text file with nominal P value per line without head
 
 
 ### Robust eQTL
