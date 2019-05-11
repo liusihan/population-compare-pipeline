@@ -2,7 +2,7 @@
 # MAKE SURE FUSION.compute_weights.R IS IN YOUR PATH
 # FILL IN THESE PATHS
 if [ $# -ne 3 ]; then
-    echo "ERROR: YOU MUST INPUTE 3 PARAMETER like: bash TWAS_weights.bash expression GENO covariant.txt"
+    echo "ERROR: YOU MUST INPUTE 3 PARAMETER like: bash TWAS_compute_weights.bash expression GENO covariant.txt"
 else
     GCTA="gcta_nr_robust"
     PLINK="plink"
