@@ -13,7 +13,7 @@ This repository contains analysis pipelines for:<br>
 git clone https://github.com/liusihan/Chinese-brain-project
 ```
 
-### Software
+### Softwares
   * R-3.3.3
   * [QTLtools](https://qtltools.github.io/qtltools/)
   * [LDSC](https://github.com/bulik/ldsc)
