@@ -43,7 +43,6 @@ for(i in 1:nrow(meta)){
 rownames(meta)<-meta$BID
 write.table(meta, file="meta2.txt", sep="\t", row.names=F, col.names=T, quote=F)
 
-## phenotypes
 meta$RIN_square <- meta$RIN^2
 meta$ageDeath_square <- meta$ageDeath^2
 
@@ -52,11 +51,31 @@ meta$ageDeath_square <- meta$ageDeath^2
 ##--- log2(CPM) normalization        ----##
 ###########################################
 
-## load quantification data & log2(CPM) normalization
-#read raw count data
+#read raw count data and annotation file
 count<-read.table("raw.count",head=T,row.names=1)
+annotation = read.csv("annotation.gene.gencodeV19.csv")
+
+# assess for Sample Swaps by XIST and Y chromosome
+mds = cmdscale(dist(t(log2(0.001 + count[annotation$chr=="chrY",]))))
+xist = log2(0.001+count["ENSG00000229807",])
+
+col.blue = rgb(t(col2rgb("blue")),alpha=50,maxColorValue = 255); col.pink=rgb(t(col2rgb("pink")),alpha=50,maxColorValue = 255)
+sex_col = rep(col.blue, times=nrow(mds)); sex_col[meta$Sex=="F"] =col.pink
+plot(xist, mds[,1], col=sex_col,pch=19)
+
+tree = hclust(dist(cbind(xist,mds[,1])),"average")
+sex_pred= factor(gsub(2, "F", gsub("1","M", cutree(tree,k=2))))
+plot(xist, mds[,1], col=(sex_pred),pch=19)
+
+discordant = (meta$sex=="M" & sex_pred=="F") | (meta$sex=="F" & sex_pred=="M")
+
+#remove sex mismatch sample
+count2<-count[,!discordant]
+
+
+#log2(CPM) normalization
 library(limma)
-log2cpm<-voom(count)$E
+log2cpm<-voom(count2)$E
 
 write.table(log2cpm,file="log2cpm",sep="\t",row.names=T,col.names=T,quote=F)
 
@@ -67,7 +86,6 @@ write.table(log2cpm,file="log2cpm",sep="\t",row.names=T,col.names=T,quote=F)
 ## keep genes with at least 1 CPM in at least 25% of the individuals
 library(DESeq2)
 genes_to_keep = apply(log2cpm>=0,1,sum) >= round(0.25 * ncol(log2cpm))
-annotation = read.csv("annotation.gene.gencodeV19.csv") 
 log2cpm.fgene = log2cpm[genes_to_keep,] 
 annot<-annotation[annotation$gene_id %in% rownames(log2cpm.fgene),]
 brainExpressedNoMT<-annot[annot$chr!="chrM"&annot$chr!="chrY"&annot$chr!="chrX",]
