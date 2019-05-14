@@ -4,7 +4,7 @@
 ###########################################
 
 ## meta information
-meta<-read.table("synapse-meta-clinical-technical-data-BrainGVEX-RNAseq-TonyaCurrated-V2-GGedits2.txt",sep="\t",head=T)
+meta<-read.table("meta.txt",sep="\t",head=T)
 meta$LibraryBatch<-as.character(meta$LibraryBatch)
 
 ## LibraryBatch cluster by hclust
@@ -41,19 +41,11 @@ for(i in 1:nrow(meta)){
     meta$RNAIsolationBatchClustered[i]<-paste("B",RNAIsolationBatch.id[meta$RNAIsolationBatch[i]],sep="")
 }
 rownames(meta)<-meta$BID
-meta$PMI[which(is.na(meta$PMI))]<-mean(which(!is.na(meta$PMI)))
-write.table(meta, file="synapse-meta-clinical-technical-data-BrainGVEX-RNAseq-TonyaCurrated-V2-GGedits3.txt", sep="\t", row.names=F, col.names=T, quote=F)
+write.table(meta, file="meta2.txt", sep="\t", row.names=F, col.names=T, quote=F)
 
 ## phenotypes
-phe<-c("RIN", "sex", "Group", "ageDeath", "CauseDeath", "RNAIsolationBatch", "libraryBatch", "RNAseqBatch")
-phe<-c("BrainBank", "Hemisphere", "Sex", "Ethnicity", "Diagnosis", "TissueState", "RNAIsolationBatchClustered", "LibraryBatchClustered", "ERCC_Added", "RNAseqBatch", "SequencingPlatform", "PMI", "BrainWeight", "YearAutopsy", "AgeDeath", "RIN")
-meta <- meta[,phe]
 meta$RIN_square <- meta$RIN^2
-meta$BrainWeight_square <- meta$BrainWeight^2
-meta$YearAutopsy_square <- meta$YearAutopsy^2
-meta$ageDeath_square <- meta$AgeDeath^2
-meta$PMI_square <- meta$RIN^2
-
+meta$ageDeath_square <- meta$ageDeath^2
 
 ###########################################
 ##--- Read RNA quantification data   ----##
@@ -61,21 +53,12 @@ meta$PMI_square <- meta$RIN^2
 ###########################################
 
 ## load quantification data & log2(CPM) normalization
-load("D.QC.BrainGVEX.RData")  ## data from RujiaDai <-- Michael Gandal <mgandal@gmail.com>
+#read raw count data
+count<-read.table("raw.count",head=T,row.names=1)
 library(limma)
 log2cpm<-voom(count)$E
 
-## Classify samples by Diagnosis
-# log2cpm.ctrl<-log2cpm[,coln[coln %in% subset(meta,meta$Diagnosis=="Control")$BID]]
-# log2cpm.bp<-log2cpm[,coln[coln %in% subset(meta,meta$Diagnosis=="BP")$BID]]
-# log2cpm.scz<-log2cpm[,coln[coln %in% subset(meta,meta$Diagnosis=="SCZ")$BID]]
 write.table(log2cpm,file="log2cpm",sep="\t",row.names=T,col.names=T,quote=F)
-# write.table(log2cpm.ctrl,file="log2cpm.ctrl",sep="\t",row.names=T,col.names=NA,quote=F)
-# write.table(log2cpm.bp,file="log2cpm.bp",sep="\t",row.names=T,col.names=NA,quote=F)
-# write.table(log2cpm.scz,file="log2cpm.scz",sep="\t",row.names=T,col.names=NA,quote=F)
-# write.table(counts,file="counts.all",sep="\t",row.names=T,col.names=NA,quote=F)
-# write.table(tpm,file="tpm.all",sep="\t",row.names=T,col.names=NA,quote=F)
-
 
 ###########################################
 ##---  filter                        ----##
@@ -94,10 +77,8 @@ write.table(log2cpm.fgene, file="log2cpm.fgene", sep="\t", row.names=T, quote=F,
 ## pca
 library(ggfortify)
 library(scales)
-tpm<-read.table("chinese_brain_fsample.tpm",head=T,row.names=1)    
-tpm = tpm[brainExpressedNoMT$gene_id,]
 pdf("log2cpm.fgene.pca.pdf")
-pc<-prcomp(t(tpm.fgene))
+pc<-prcomp(t(log2cpm.fgene))
 #autoplot(pc)
 eigs<-pc$sdev^2 # calculate how much variance explained by each PC.
 eigsP1<-percent(eigs[1]/sum(eigs))
@@ -174,7 +155,7 @@ plot(cutsteps, r2out)
 dev.off()
 
 
-## pca
+## pca for quantile data
 pdf("log2cpm.fgene.fsample.qn.pca.pdf")
 pc<-prcomp(t(log2cpm.fgene.fsample.qn))
 #autoplot(pc)
@@ -186,32 +167,14 @@ plot(pc$x[,1],pc$x[,2],pch=19,col="grey",main="PCA (Quantile Normalized)",xlab=p
 dev.off()
 
 ###########################################
-##--- Realign sample ID            ------##
-###########################################
-
-old2new<-read.table("relatedness.highlyRelate.v4.anchor_RNASeq.switchDirection",head=T,sep="\t")
-old2new<-old2new[old2new[,1]=="RNASeq",c(2,4)]
-coln<-colnames(log2cpm.fgene.fsample.qn)
-coln[coln %in% old2new[,1]]<-as.character(old2new[,2])
-log2cpm.fgene.fsample.qn.realign<-log2cpm.fgene.fsample.qn
-colnames(log2cpm.fgene.fsample.qn.realign)<-coln
-log2cpm.fgene.fsample.qn.realign<-log2cpm.fgene.fsample.qn.realign[,!duplicated(coln)]
-write.table(log2cpm.fgene.fsample.qn.realign, file="log2cpm.fgene.fsample.qn.realign", sep="\t", row.names=T, quote=F,col.names=NA)
-
-
-###########################################
 ##---- Estimate hidden factors        ---##
 ###########################################
 
 library(peer)
-expr = t(as.matrix(combat_edata))  # N rows and G columns, where N is the number of samples, and G is the number of genes. No column or row names.
+expr = t(as.matrix(log2cpm.fgene.fsample.qn))  # N rows and G columns, where N is the number of samples, and G is the number of genes. No column or row names.
 dim(expr)
 factorList=list()
 residList=list()
-meta = meta[colnames(log2cpm.fgene.fsample.qn),]
-meta2$RIN_square <- meta2$RIN^2
-meta2$ageDeath_square <- meta2$ageDeath^2
-
 
 
 for(nFactor in 1:1*20){
@@ -309,8 +272,7 @@ for(i in 1:nGene){
 # }
 
 # Draw
-phe<-c("RIN", "sex", "Group", "ageDeath", "CauseDeath", "RNAIsolationBatch", "libraryBatch", "RNAseqBatch")
-phe2 <- c(paste("Factor",1:20,sep=""), phe1)
+phe<-colnames(factors2)
 pdf("covariates.bic.pdf",width=7,height=3)
 props <- table(covBIC)[paste("d$", phe, sep="")]/nGene
 bp <- barplot(props,  xlab = "Covariates", ylab = "Proportion of genes decreased BIC", main="Select covariates by decreased BIC", ylim= c(0,1),col = c("blue"), las=2, cex.axis=0.5, cex.lab=0.5, cex.main=0.7, axisnames=FALSE)
@@ -330,4 +292,4 @@ dev.off()
 
 
 save.image(file="RNA_processing.cpm.all.RData")
-write.table(factors2,file="meta.txt", sep="\t", row.names=T, quote=F,col.names=NA)
+write.table(factors2,file="meta_with_peer.txt, sep="\t", row.names=T, quote=F,col.names=NA)
