@@ -2,7 +2,7 @@
 # MAKE SURE index.r RNA_processing.r and FDR.r ARE IN YOUR PATH
 # FILL IN THESE PATHS
 if [ $# -ne 6 ]; then
-    echo "ERROR: YOU MUST INPUTE 5 PARAMETER like: bash robust_eQTL.sh sample_size index.txt PEER_factor FDR output_dir raw_counts.txt"
+    echo "ERROR: YOU MUST INPUTE 6 PARAMETER like: bash robust_eQTL.sh sample_size index.txt PEER_factor FDR output_dir raw_counts.txt"
 else
     Rscript index.r $1 $2
     mkdir $5
