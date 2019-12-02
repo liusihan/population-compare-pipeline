@@ -1,4 +1,4 @@
-Brain regulatory pattern discorvery and comparison pipeline
+Brain regulatory pattern discovery and comparison pipeline
 ====
 
 This repository contains analysis pipelines for:<br>
