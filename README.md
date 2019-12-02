@@ -29,7 +29,7 @@ git clone https://github.com/liusihan/Chinese-brain-project
 Rscript pi1.r P.txt
 ```
 
-`NOTE`: P.txt is a text file with nominal P value per line without header. We recommend use best eQTL in each gene identified in one population or tissue, and then estimates the proportion of these (π1) that detected the same pair in a second population or tissue to their nominal p-values.
+`NOTE`: P.txt is a text file with nominal P value per line without header. 
 
 
 ### Downsampling analysis
