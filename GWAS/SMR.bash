@@ -6,4 +6,4 @@ cp Chinese.epi.2 Chinese.epi
 cp Chinese.esi.2 Chinese.esi
 smr_Linux --beqtl-summary Chinese --update-epi Chinese.epi
 smr_Linux --beqtl-summary Chinese --update-esi Chinese.esi
-~/softwares/SMR/smr_Linux --bfile chrall --gwas-summary EAS_SCZ.ma --beqtl-summary Chinese --out Chinese_SCZ --thread-num 10 --cis-wind 1000
+~/softwares/SMR/smr_Linux --bfile chrall --gwas-summary EAS_SCZ.ma --beqtl-summary Chinese --out Chinese_SCZ --thread-num 10
