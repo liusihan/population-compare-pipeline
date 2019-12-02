@@ -23,32 +23,16 @@ done
 
 
 ##refine genotype and remove SNPs with R2<0.3
-for i in {1..22} X
+for i in {1..22}
 do
 java -jar beagle.27Jul16.86a.jar map=plink.chr"$i".GRCh37.map gl=chr"$i"_fsample.recode.vcf out=chr$i.refine.gl
 zcat chr$i.refine.gl.vcf.gz | awk '{if($1~/^#/){print}else{flag=0;split($8,a,";");for(i in a){if(a[i]~/^AR2=/&&substr(a[i],5)>=0.3){flag=1}}if(flag==1){print}}}'>chr$i.beagle.refine.r2.vcf
 done
 
-#for chromosome X: sperate PAR1, PAR2 and nonPAR region(named PAR3)
-cat chrX_fsample.recode.vcf | awk '$1~/#/{print $0}$2>=60001&&$2<=2699520' >chrX_par_refine.vcf             
-cat chrX_fsample.recode.vcf | awk '$1~/#/{print $0}$2>=60001&&$2<=2699520' >chrX_PAR1_refine.vcf
-cat chrX_fsample.recode.vcf | awk '$1~/#/{print $0}$2>=2699521&&$2<=154931043' >chrX_PAR3_refine.vcf 
-cp plink.chrX.GRCh37.map plink.chrX_par3.GRCh37.map
-
-#Only 42 sites located in PAR1 region and no snp for PAR2 region.
-
-for i in {1..3}
-do
-java -jar beagle.27Jul16.86a.jar map=plink.chrX_par"$i".GRCh37.map gl=chrX_PAR"$i"_refine.vcf out=X.par"$i"_refine
-done
-
-
-
-
 
 ##Combine all chr
 cat chr22.beagle.refine.r2.vcf |head -n 11 >all.refine.r2.vcf
-for i in {1..22} X
+for i in {1..22} 
 do
 cat chr"$i".beagle.refine.r2.vcf | awk 'NR>=12' >>all.refine.r2.vcf
 done
@@ -62,7 +46,7 @@ perl HRC-1000G-check-bim.pl -b all.refine.bim -f all.refine.frq -r 1000GP_Phase3
 
 ##plink to vcf
 bash Run-plink.sh(#The perl script will generate a list of PLINK commands to be run on the original dataset)
-for CHR in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23; do plink --bfile all.refine-updated-chr${CHR} --out ${CHR} --recode vcf-fid
+for CHR in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22; do plink --bfile all.refine-updated-chr${CHR} --out ${CHR} --recode vcf-fid
 bgzip -c ${CHR}.vcf >${CHR}.vcf.gz done
 
 
