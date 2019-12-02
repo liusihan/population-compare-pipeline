@@ -3,7 +3,7 @@
 ##-------- Cluster library batch --------##
 ###########################################
 
-## meta information
+## load meta information
 meta<-read.table("meta.txt",sep="\t",head=T)
 meta$LibraryBatch<-as.character(meta$LibraryBatch)
 
