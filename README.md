@@ -44,9 +44,3 @@ bash robust_eQTL.sh sample_size index.txt PEER_factor FDR output_dir raw_counts.
 * raw_counts.txt: raw counts data, each column stand for a sample, each raw stand for a gene
 
 `NOTE`: the output_file include three type eQTL results under different mode in QTLtools(nominal/permutation/conditional)
-
-  
-### Robust WGCNA
-```R
-Rscript ....
-```
