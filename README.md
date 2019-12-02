@@ -11,7 +11,7 @@ This repository contains analysis pipelines for:<br>
 
 ### Install
 ```Linux
-git clone https://github.com/liusihan/Chinese-brain-project
+git clone https://github.com/liusihan/EAS-and-EUR-brain-regulatory-pattern-discovory-and-comparson-pipeline
 ```
 
 ### Softwares
