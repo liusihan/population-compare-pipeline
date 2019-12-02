@@ -3,7 +3,7 @@ for i in RNA-seq/*
 cd $i
 zcat CL*_1.fq.gz | gzip > merge_1.fq.gz
 zcat CL*_2.fq.gz | gzip > merge_2.fq.gz
-/opt/tools/FastQC/fastqc -t 8 ./merge_*.fq.gz
+fastqc -t 8 ./merge_*.fq.gz
 cd ..
 done
 
