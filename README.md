@@ -1,9 +1,10 @@
-Chinese-brain-project eQTL pipeline
+Brain regulatory pattern discorvery and comparison pipeline
 ====
 
 This repository contains analysis pipelines for:<br>
   * RNA-seq alignment, quantification, and quality control<br>
-  * eQTL mapping and functional annotation<br>
+  * DNA-seq imputation and quality control
+  * eQTL and sQTL mapping and functional annotation<br>
   * Intergrate with GWAS summary result<br>
   * Preservation test and robust WGCNA<br>
 
@@ -17,8 +18,8 @@ git clone https://github.com/liusihan/Chinese-brain-project
   * R-3.3.3
   * [QTLtools](https://qtltools.github.io/qtltools/)
   * [LDSC](https://github.com/bulik/ldsc)
-  * [TWAS](http://gusevlab.org/projects/fusion/#jointconditional-tests-and-plots)
-
+  * [SMR](https://cnsgenomics.com/software/smr/)
+  * [PrediXcan](https://github.com/hakyim/PrediXcan)
 
 
 ## Usage
@@ -31,7 +32,7 @@ Rscript pi1.r P.txt
 `NOTE`: P.txt is a text file with nominal P value per line without header. We recommend use best eQTL in each gene identified in one population or tissue, and then estimates the proportion of these (π1) that detected the same pair in a second population or tissue to their nominal p-values.
 
 
-### Robust eQTL
+### Downsampling analysis
 ```Linux
 bash robust_eQTL.sh sample_size index.txt PEER_factor FDR output_dir raw_counts.txt
 ```
@@ -44,13 +45,6 @@ bash robust_eQTL.sh sample_size index.txt PEER_factor FDR output_dir raw_counts.
 
 `NOTE`: the output_file include three type eQTL results under different mode in QTLtools(nominal/permutation/conditional)
 
-### Create TWAS expressing weights
-```Linux
-bash TWAS_compute_weights.bash expression GENO covariant.txt
-```
-* expression: gene expression file with three aditional column: chr, star, end
-* GENO: plink bfile for chromosome
-* covariant.txt: text file contain the covariants
   
 ### Robust WGCNA
 ```R
