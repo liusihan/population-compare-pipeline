@@ -3,8 +3,8 @@ Brain regulatory pattern discovery and comparison pipeline
 
 This repository contains analysis pipelines for:<br>
   * RNA-seq alignment, quantification, and quality control<br>
-  * DNA-seq imputation and quality control
-  * eQTL and sQTL mapping and functional annotation<br>
+  * DNA-seq quality control and imputation<br>
+  * eQTL and sQTL mapping<br>
   * Intergrate with GWAS summary result<br>
   * Preservation test and robust WGCNA<br>
 
