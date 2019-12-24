@@ -12,7 +12,7 @@ python scripts/prepare_phenotype_table.py output/Chinese_perind.counts.gz -p 10
 #nominal
 parallel -j 10 QTLtools cis --vcf genotypes.all.chr{}.vcf.gz --bed Chinese.chr{}.bed.gz --region {} --cov Covariant.txt --out eqtl.permute.chr{} --nominal 1 ::: {1..22}
 
-#permutation test
+#permutation
 parallel -j 10 QTLtools cis --vcf genotypes.all.chr{}.vcf.gz --bed Chinese.chr{}.bed.gz --region {} --cov Covariant.txt --out eqtl.permute.chr{} --permute 1000 ::: {1..22}
 
 
