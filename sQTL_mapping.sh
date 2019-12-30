@@ -1,8 +1,3 @@
-##Alignment
-#index
-STAR --runMode genomeGenerate --genomeDir ../index --genomeFastaFiles ~/database/hg19.fa --sjdbGTFfile ~/database/gencode.v19.annotation.gtf --sjdbOverhang 100
-for i in *.fastq; do echo $i; STAR --genomeDir ../index  --readFilesIn $i  --twopassMode Basic --outSAMstrandField intronMotif --outSAMtype BAM Unsorted --outFileNamePrefix $i;done
-
 ##phenotype is prepared by leafcutter
 for bamfile in $(ls ~/*.bam);do£» echo Converting $bamfile to $bamfile.junc; sh bam2junc.sh $bamfile $bamfile.junc; echo $bamfile.junc >> Chinese_juncfiles.txt; done
 python /leafcutter/clustering/leafcutter_cluster.py -j Chinese_juncfiles.txt -m 50 -o ../output/Chinese -l 500000
