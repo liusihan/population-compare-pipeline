@@ -1,4 +1,4 @@
-Brain regulatory pattern discovery and comparison pipeline
+Analysis pipelines for eQTL/sQTL discovery and GWAS signals interpratation
 ====
 
 This repository contains analysis pipelines for:<br>
