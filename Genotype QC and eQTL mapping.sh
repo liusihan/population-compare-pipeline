@@ -133,7 +133,7 @@ done
 
 ## Map eQTL
 #nominal
-parallel -j 10 QTLtools_1.0_CentOS6.8_x86_64 cis --vcf genotypes.all.chr{}.vcf.gz --bed phenotype.chr{}.bed.gz --region {} --cov Covariant.txt --out eqtl.permute.chr{} --nominal 1 ::: {1..22} X
+parallel -j 10 QTLtools_1.0_CentOS6.8_x86_64 cis --vcf genotypes.all.chr{}.vcf.gz --bed phenotype.chr{}.bed.gz --region {} --cov Covariant.txt --out eqtl.nopermute.chr{} --nominal 1 ::: {1..22} X
 
 #permutation test
 parallel -j 10 QTLtools_1.0_CentOS6.8_x86_64 cis --vcf genotypes.all.chr{}.vcf.gz --bed phenotype.chr{}.bed.gz --region {} --cov Covariant.txt --out eqtl.permute.chr{} --permute 1000 ::: {1..22} X
