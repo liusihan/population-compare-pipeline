@@ -1,20 +1,21 @@
-Analysis pipelines for eQTL/sQTL discovery and GWAS signals interpratation
-====
+# Analysis pipelines for eQTL/sQTL discovery and GWAS signals interpratation
 
-This repository contains analysis pipelines for:<br>
-  * RNA-seq alignment, quantification, and quality control<br>
+This repository contains analysis and ploting code in our paper about constructing brain expression architecture in East Asian population:<br>
   * DNA-seq quality control and imputation<br>
+  * RNA-seq alignment, quantification, and quality control<br>
   * eQTL and sQTL mapping<br>
   * Intergrating with GWAS summary result<br>
   * Preservation test and robust WGCNA<br>
 
+## Introduction
 
-### Install
+## Install
+
 ```Linux
 git clone https://github.com/liusihan/EAS-and-EUR-brain-regulatory-pattern-discovory-and-comparson-pipeline
 ```
 
-### Softwares
+## Dependencies
   * R-3.3.3
   * [QTLtools](https://qtltools.github.io/qtltools/)
   * [LDSC](https://github.com/bulik/ldsc)
@@ -24,7 +25,7 @@ git clone https://github.com/liusihan/EAS-and-EUR-brain-regulatory-pattern-disco
 
 ## Usage
 
-### QTl replicatin rate
+### QTL replicatin rate
 ```R
 Rscript pi1.r P.txt
 ```
