@@ -1,4 +1,4 @@
-# Analysis pipelines for eQTL/sQTL discovery and GWAS signals interpratation
+# Cross-ancestry analysis of brain QTLs enhances interpretation of schizophrenia GWAS
 
 This repository contains analysis and ploting code in our paper about constructing brain expression architecture in East Asian population:<br>
   * DNA-seq quality control and imputation<br>
