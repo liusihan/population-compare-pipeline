@@ -46,6 +46,6 @@ bash robust_eQTL.sh sample_size index.txt PEER_factor FDR output_dir raw_counts.
 
 `NOTE`: the output_file include three type eQTL results under different mode in QTLtools(nominal/permutation/conditional)
 
-### Data Availability
+## Data Availability
 The summary statistics of eQTLs generated in this study are available on the CNBrainQTL (Chinese Brain xQTL) database at http://121.41.22.25:8080/#/.”](http://121.41.22.25:8080/qtl_v1/#/.
 
