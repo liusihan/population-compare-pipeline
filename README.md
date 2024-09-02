@@ -45,3 +45,7 @@ bash robust_eQTL.sh sample_size index.txt PEER_factor FDR output_dir raw_counts.
 * raw_counts.txt: raw counts data, each column stand for a sample, each raw stand for a gene
 
 `NOTE`: the output_file include three type eQTL results under different mode in QTLtools(nominal/permutation/conditional)
+
+### Data Availability
+The summary statistics of eQTLs generated in this study are available on the CNBrainQTL (Chinese Brain xQTL) database at http://121.41.22.25:8080/#/.”](http://121.41.22.25:8080/qtl_v1/#/.
+
